@@ -1,0 +1,723 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{main}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{setup}{%
+\section{1. Setup}\label{setup}}
+
+    \hypertarget{enter-virtual-environment}{%
+\subsection{1.1 Enter Virtual
+Environment}\label{enter-virtual-environment}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} create new virutalenvironment \PYZlt{}thyroidenv\PYZgt{} \PYZam{}\PYZam{} set WD to \PYZlt{}thyroidenv\PYZgt{} \PYZam{}\PYZam{} start \PYZlt{}thyroidenv\PYZgt{}}
+        \PY{c+c1}{\PYZsh{} !virtualenv /home/neekonsu/Thyroid\PYZhy{}Clustering/thyroidenv \PYZam{}\PYZam{} cd /home/neekonsu/Thyroid\PYZhy{}Clustering/thyroidenv \PYZam{}\PYZam{} source bin/activate}
+\end{Verbatim}
+
+
+    \hypertarget{import-dependencies}{%
+\subsection{1.2 Import dependencies}\label{import-dependencies}}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} install prerequisite packages}
+        \PY{o}{!}pip install keras scikit\PYZhy{}learn pandas matplotlib tqdm numpy tensorflow
+        \PY{c+c1}{\PYZsh{} for stats utils use sklearn}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+        \PY{c+c1}{\PYZsh{} for .gz extraction use gzip}
+        \PY{k+kn}{import} \PY{n+nn}{gzip}
+        \PY{c+c1}{\PYZsh{} for shell utils use shutil}
+        \PY{k+kn}{import} \PY{n+nn}{shutil}
+        \PY{c+c1}{\PYZsh{} for garbage collection use gc}
+        \PY{k+kn}{import} \PY{n+nn}{gc}
+        \PY{c+c1}{\PYZsh{} for dataframe use pandas}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{c+c1}{\PYZsh{} for basic plots use matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{c+c1}{\PYZsh{} for interfacing with filesystem use os}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{c+c1}{\PYZsh{} for execution progress bars use tqdm}
+        \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{n}{tqdm}
+        \PY{c+c1}{\PYZsh{} for math utils use numpy}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{c+c1}{\PYZsh{} FORMAT MATPLOTLIB}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{c+c1}{\PYZsh{} Force garbage collector (free unneeded RAM)}
+        \PY{n}{gc}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Requirement already satisfied: keras in /home/neekonsu/.local/lib/python3.7/site-packages (2.2.4)
+Requirement already satisfied: scikit-learn in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (0.20.2)
+Requirement already satisfied: pandas in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (0.24.1)
+Requirement already satisfied: matplotlib in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (3.0.2)
+Requirement already satisfied: tqdm in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (4.31.1)
+Requirement already satisfied: numpy in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (1.15.4)
+Requirement already satisfied: tensorflow in /home/neekonsu/.local/lib/python3.7/site-packages (1.13.1)
+Requirement already satisfied: h5py in /home/neekonsu/.local/lib/python3.7/site-packages (from keras) (2.9.0)
+Requirement already satisfied: keras-preprocessing>=1.0.5 in /home/neekonsu/.local/lib/python3.7/site-packages (from keras) (1.1.0)
+Requirement already satisfied: scipy>=0.14 in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (from keras) (1.2.0)
+Requirement already satisfied: six>=1.9.0 in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (from keras) (1.12.0)
+Requirement already satisfied: keras-applications>=1.0.6 in /home/neekonsu/.local/lib/python3.7/site-packages (from keras) (1.0.8)
+Requirement already satisfied: pyyaml in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (from keras) (3.13)
+Requirement already satisfied: pytz>=2011k in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (from pandas) (2018.9)
+Requirement already satisfied: python-dateutil>=2.5.0 in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (from pandas) (2.7.5)
+Requirement already satisfied: cycler>=0.10 in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (from matplotlib) (0.10.0)
+Requirement already satisfied: kiwisolver>=1.0.1 in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (from matplotlib) (1.0.1)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (from matplotlib) (2.3.1)
+Requirement already satisfied: tensorflow-estimator<1.14.0rc0,>=1.13.0 in /home/neekonsu/.local/lib/python3.7/site-packages (from tensorflow) (1.13.0)
+Requirement already satisfied: termcolor>=1.1.0 in /home/neekonsu/.local/lib/python3.7/site-packages (from tensorflow) (1.1.0)
+Requirement already satisfied: absl-py>=0.1.6 in /home/neekonsu/.local/lib/python3.7/site-packages (from tensorflow) (0.7.1)
+Requirement already satisfied: astor>=0.6.0 in /home/neekonsu/.local/lib/python3.7/site-packages (from tensorflow) (0.8.0)
+Requirement already satisfied: gast>=0.2.0 in /home/neekonsu/.local/lib/python3.7/site-packages (from tensorflow) (0.2.2)
+Requirement already satisfied: wheel>=0.26 in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (from tensorflow) (0.32.3)
+Requirement already satisfied: tensorboard<1.14.0,>=1.13.0 in /home/neekonsu/.local/lib/python3.7/site-packages (from tensorflow) (1.13.1)
+Requirement already satisfied: protobuf>=3.6.1 in /home/neekonsu/.local/lib/python3.7/site-packages (from tensorflow) (3.8.0)
+Requirement already satisfied: grpcio>=1.8.6 in /home/neekonsu/.local/lib/python3.7/site-packages (from tensorflow) (1.21.1)
+Requirement already satisfied: setuptools in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (from kiwisolver>=1.0.1->matplotlib) (40.6.3)
+Requirement already satisfied: mock>=2.0.0 in /home/neekonsu/.local/lib/python3.7/site-packages (from tensorflow-estimator<1.14.0rc0,>=1.13.0->tensorflow) (3.0.5)
+Requirement already satisfied: markdown>=2.6.8 in /scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages (from tensorboard<1.14.0,>=1.13.0->tensorflow) (3.0.1)
+Requirement already satisfied: werkzeug>=0.11.15 in /home/neekonsu/.local/lib/python3.7/site-packages (from tensorboard<1.14.0,>=1.13.0->tensorflow) (0.15.4)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} 4
+\end{Verbatim}
+            
+    \hypertarget{clear-data-repository-and-download-from-source}{%
+\subsection{1.3 Clear data repository and download from
+source}\label{clear-data-repository-and-download-from-source}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} remove all existing files in filedump directory}
+        \PY{o}{!}rm \PY{l+s+s2}{\PYZdq{}/srv/gsfs0/projects/snyder/neekonsu/*\PYZdq{}}
+        \PY{c+c1}{\PYZsh{} pull RNAseq from GTEx source}
+        \PY{o}{!}wget \PY{l+s+s2}{\PYZdq{}https://storage.googleapis.com/gtex\PYZus{}analysis\PYZus{}v7/rna\PYZus{}seq\PYZus{}data/GTEx\PYZus{}Analysis\PYZus{}2016\PYZhy{}01\PYZhy{}15\PYZus{}v7\PYZus{}RNASeQCv1.1.8\PYZus{}gene\PYZus{}tpm.gct.gz\PYZdq{}} \PYZhy{}O \PY{l+s+s2}{\PYZdq{}/srv/gsfs0/projects/snyder/neekonsu/GTEx\PYZus{}Analysis\PYZus{}2016\PYZhy{}01\PYZhy{}15\PYZus{}v7\PYZus{}RNASeQCv1.1.8\PYZus{}gene\PYZus{}tpm.gct.gz\PYZdq{}}
+        \PY{c+c1}{\PYZsh{} collect garbage}
+        \PY{c+c1}{\PYZsh{} gc.collect()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+rm: cannot remove ‘/srv/gsfs0/projects/snyder/neekonsu/*’: No such file or directory
+--2019-06-14 14:37:00--  https://storage.googleapis.com/gtex\_analysis\_v7/rna\_seq\_data/GTEx\_Analysis\_2016-01-15\_v7\_RNASeQCv1.1.8\_gene\_tpm.gct.gz
+Resolving storage.googleapis.com (storage.googleapis.com){\ldots} 172.217.6.80, 2607:f8b0:4005:80a::2010
+Connecting to storage.googleapis.com (storage.googleapis.com)|172.217.6.80|:443{\ldots} connected.
+HTTP request sent, awaiting response{\ldots} 200 OK
+Length: 867038648 (827M) [application/gzip]
+Saving to: ‘/srv/gsfs0/projects/snyder/neekonsu/GTEx\_Analysis\_2016-01-15\_v7\_RNASeQCv1.1.8\_gene\_tpm.gct.gz’
+
+100\%[======================================>] 867,038,648  212MB/s   in 4.7s   
+
+2019-06-14 14:37:05 (176 MB/s) - ‘/srv/gsfs0/projects/snyder/neekonsu/GTEx\_Analysis\_2016-01-15\_v7\_RNASeQCv1.1.8\_gene\_tpm.gct.gz’ saved [867038648/867038648]
+
+
+    \end{Verbatim}
+
+    \hypertarget{unzip-source}{%
+\subsection{1.4 Unzip source}\label{unzip-source}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} open data archive with gzip}
+        \PY{k}{with} \PY{n}{gzip}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/srv/gsfs0/projects/snyder/neekonsu/GTEx\PYZus{}Analysis\PYZus{}2016\PYZhy{}01\PYZhy{}15\PYZus{}v7\PYZus{}RNASeQCv1.1.8\PYZus{}gene\PYZus{}tpm.gct.gz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f\PYZus{}in}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} open constituant data in write mode}
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/srv/gsfs0/projects/snyder/neekonsu/GTEx\PYZus{}Analysis\PYZus{}2016\PYZhy{}01\PYZhy{}15\PYZus{}v7\PYZus{}RNASeQCv1.1.8\PYZus{}gene\PYZus{}tpm.gct}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f\PYZus{}out}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} copy extracted file out of archive}
+                \PY{n}{shutil}\PY{o}{.}\PY{n}{copyfileobj}\PY{p}{(}\PY{n}{f\PYZus{}in}\PY{p}{,} \PY{n}{f\PYZus{}out}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} collect garbage}
+        \PY{c+c1}{\PYZsh{} gc.collect()}
+        \PY{c+c1}{\PYZsh{} remove archive}
+        \PY{o}{!}rm \PY{l+s+s2}{\PYZdq{}/srv/gsfs0/projects/snyder/neekonsu/GTEx\PYZus{}Analysis\PYZus{}2016\PYZhy{}01\PYZhy{}15\PYZus{}v7\PYZus{}RNASeQCv1.1.8\PYZus{}gene\PYZus{}tpm.gct.gz\PYZdq{}}
+        \PY{c+c1}{\PYZsh{} collect garbage}
+        \PY{c+c1}{\PYZsh{} gc.collect()}
+\end{Verbatim}
+
+
+    \hypertarget{sanitize-data}{%
+\section{2 Sanitize data}\label{sanitize-data}}
+
+    \hypertarget{clear-metadata}{%
+\subsection{2.1 Clear metadata}\label{clear-metadata}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} read all lines except first three \PYZgt{}(write to temporary file)\PYZgt{}(overwrite original file with temporary)}
+        \PY{o}{!}sed \PYZhy{}i \PY{l+m}{1},2d \PY{l+s+s2}{\PYZdq{}/srv/gsfs0/projects/snyder/neekonsu/GTEx\PYZus{}Analysis\PYZus{}2016\PYZhy{}01\PYZhy{}15\PYZus{}v7\PYZus{}RNASeQCv1.1.8\PYZus{}gene\PYZus{}tpm.gct\PYZdq{}}
+        \PY{c+c1}{\PYZsh{} read first line to check that datafile begins with column\PYZhy{}names}
+        \PY{c+c1}{\PYZsh{} !head \PYZhy{}c1k \PYZdq{}/srv/gsfs0/projects/snyder/neekonsu/GTEx\PYZus{}Analysis\PYZus{}2016\PYZhy{}01\PYZhy{}15\PYZus{}v7\PYZus{}RNASeQCv1.1.8\PYZus{}gene\PYZus{}tpm.gct\PYZdq{}}
+\end{Verbatim}
+
+
+    \hypertarget{load-source-to-pandas-dataframe}{%
+\subsection{2.2 Load source to pandas
+dataframe}\label{load-source-to-pandas-dataframe}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} collect garbage}
+        \PY{c+c1}{\PYZsh{} gc.collect()}
+        \PY{c+c1}{\PYZsh{} read GTEx RNAseq (TPM) to dataframe \PYZlt{}data\PYZgt{}}
+        \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/srv/gsfs0/projects/snyder/neekonsu/GTEx\PYZus{}Analysis\PYZus{}2016\PYZhy{}01\PYZhy{}15\PYZus{}v7\PYZus{}RNASeQCv1.1.8\PYZus{}gene\PYZus{}tpm.gct.tmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Preview the first 5 lines of the loaded data }
+        \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ERROR:root:Internal Python error in the inspect module.
+Below is the traceback from this internal error.
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Traceback (most recent call last):
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/pandas/io/parsers.py", line 1995, in read
+    data = self.\_reader.read(nrows)
+  File "pandas/\_libs/parsers.pyx", line 899, in pandas.\_libs.parsers.TextReader.read
+  File "pandas/\_libs/parsers.pyx", line 914, in pandas.\_libs.parsers.TextReader.\_read\_low\_memory
+  File "pandas/\_libs/parsers.pyx", line 991, in pandas.\_libs.parsers.TextReader.\_read\_rows
+  File "pandas/\_libs/parsers.pyx", line 1123, in pandas.\_libs.parsers.TextReader.\_convert\_column\_data
+  File "pandas/\_libs/parsers.pyx", line 1169, in pandas.\_libs.parsers.TextReader.\_convert\_tokens
+  File "pandas/\_libs/parsers.pyx", line 1215, in pandas.\_libs.parsers.TextReader.\_convert\_with\_dtype
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/pandas/core/dtypes/common.py", line 572, in is\_categorical\_dtype
+    def is\_categorical\_dtype(arr\_or\_dtype):
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/IPython/core/interactiveshell.py", line 3267, in run\_code
+    exec(code\_obj, self.user\_global\_ns, self.user\_ns)
+  File "<ipython-input-6-64e43609531f>", line 4, in <module>
+    data = pd.read\_csv('/srv/gsfs0/projects/snyder/neekonsu/GTEx\_Analysis\_2016-01-15\_v7\_RNASeQCv1.1.8\_gene\_tpm.gct.tmp', sep='\textbackslash{}t')
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/pandas/io/parsers.py", line 702, in parser\_f
+    return \_read(filepath\_or\_buffer, kwds)
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/pandas/io/parsers.py", line 435, in \_read
+    data = parser.read(nrows)
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/pandas/io/parsers.py", line 1139, in read
+    ret = self.\_engine.read(nrows)
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/pandas/io/parsers.py", line 1995, in read
+    data = self.\_reader.read(nrows)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/IPython/core/interactiveshell.py", line 2018, in showtraceback
+    stb = value.\_render\_traceback\_()
+AttributeError: 'KeyboardInterrupt' object has no attribute '\_render\_traceback\_'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/IPython/core/ultratb.py", line 1095, in get\_records
+    return \_fixed\_getinnerframes(etb, number\_of\_lines\_of\_context, tb\_offset)
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/IPython/core/ultratb.py", line 313, in wrapped
+    return f(*args, **kwargs)
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/IPython/core/ultratb.py", line 347, in \_fixed\_getinnerframes
+    records = fix\_frame\_records\_filenames(inspect.getinnerframes(etb, context))
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/inspect.py", line 1500, in getinnerframes
+    frameinfo = (tb.tb\_frame,) + getframeinfo(tb, context)
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/inspect.py", line 1462, in getframeinfo
+    lines, lnum = findsource(frame)
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/site-packages/IPython/core/ultratb.py", line 179, in findsource
+    lines = linecache.getlines(file, globals\_dict)
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/linecache.py", line 47, in getlines
+    return updatecache(filename, module\_globals)
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/linecache.py", line 136, in updatecache
+    with tokenize.open(fullname) as fp:
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/tokenize.py", line 449, in open
+    encoding, lines = detect\_encoding(buffer.readline)
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/tokenize.py", line 418, in detect\_encoding
+    first = read\_or\_stop()
+  File "/scg/apps/software/jupyter/python\_3.7/lib/python3.7/tokenize.py", line 376, in read\_or\_stop
+    return readline()
+KeyboardInterrupt
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+KeyboardInterrupt
+
+
+    \end{Verbatim}
+
+    \hypertarget{tail-for-validation}{%
+\subsection{2.3 Tail for validation}\label{tail-for-validation}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Preview the last 5 lines of the loaded data}
+        \PY{n}{data}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{shape-for-validation}{%
+\subsection{2.4 Shape for validation}\label{shape-for-validation}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} return dimensions of \PYZlt{}data\PYZgt{}}
+        \PY{n}{data}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \hypertarget{drop-textual-fields}{%
+\subsection{2.5 Drop textual fields}\label{drop-textual-fields}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} collect garbage}
+        \PY{c+c1}{\PYZsh{} gc.collect()}
+        \PY{c+c1}{\PYZsh{} drop irrelevant attributes from dataframe such that \PYZlt{}data\PYZgt{} only stores numerical data}
+        \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Description}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Preview the first 5 lines of the loaded data }
+        \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{standardize-the-data}{%
+\subsection{2.6 Standardize the data}\label{standardize-the-data}}
+
+    \hypertarget{pull-relevant-thyroid-fields}{%
+\subsection{2.7 Pull relevant (thyroid)
+fields}\label{pull-relevant-thyroid-fields}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} construct [fields] to represent all relevant features (thyroid)}
+        \PY{n}{fields}\PY{o}{=}\PY{p}{[}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}111CU\PYZhy{}0226\PYZhy{}SM\PYZhy{}5GZXC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}111FC\PYZhy{}1026\PYZhy{}SM\PYZhy{}5GZX1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}111VG\PYZhy{}0526\PYZhy{}SM\PYZhy{}5N9BW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}111YS\PYZhy{}0726\PYZhy{}SM\PYZhy{}5GZY8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1122O\PYZhy{}0226\PYZhy{}SM\PYZhy{}5N9DA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1128S\PYZhy{}0126\PYZhy{}SM\PYZhy{}5H12S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}113JC\PYZhy{}0126\PYZhy{}SM\PYZhy{}5EGJW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}117XS\PYZhy{}0526\PYZhy{}SM\PYZhy{}5987Q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}117YW\PYZhy{}0126\PYZhy{}SM\PYZhy{}5EGGN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}117YX\PYZhy{}1226\PYZhy{}SM\PYZhy{}5H11S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1192W\PYZhy{}0126\PYZhy{}SM\PYZhy{}5EGGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1192X\PYZhy{}1126\PYZhy{}SM\PYZhy{}5EGGU}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11DXX\PYZhy{}0226\PYZhy{}SM\PYZhy{}5P9HL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11DXY\PYZhy{}0426\PYZhy{}SM\PYZhy{}5H12R}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11DXZ\PYZhy{}0926\PYZhy{}SM\PYZhy{}5N9CG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11DYG\PYZhy{}0826\PYZhy{}SM\PYZhy{}5N9GH}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11DZ1\PYZhy{}2726\PYZhy{}SM\PYZhy{}5A5KH}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11EI6\PYZhy{}0726\PYZhy{}SM\PYZhy{}59866}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11EM3\PYZhy{}0126\PYZhy{}SM\PYZhy{}5985K}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11EMC\PYZhy{}0226\PYZhy{}SM\PYZhy{}5EGLP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11EQ8\PYZhy{}0826\PYZhy{}SM\PYZhy{}5N9FG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11EQ9\PYZhy{}0626\PYZhy{}SM\PYZhy{}5A5K1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11GS4\PYZhy{}0826\PYZhy{}SM\PYZhy{}5986J}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11GSO\PYZhy{}0626\PYZhy{}SM\PYZhy{}5A5LW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11I78\PYZhy{}0526\PYZhy{}SM\PYZhy{}5986A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11LCK\PYZhy{}0526\PYZhy{}SM\PYZhy{}5A5M9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11NSD\PYZhy{}0126\PYZhy{}SM\PYZhy{}5987F}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11NUK\PYZhy{}1026\PYZhy{}SM\PYZhy{}5HL5J}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11NV4\PYZhy{}0626\PYZhy{}SM\PYZhy{}5N9BR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11O72\PYZhy{}2326\PYZhy{}SM\PYZhy{}5BC7H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11OF3\PYZhy{}0626\PYZhy{}SM\PYZhy{}5BC4Y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11P7K\PYZhy{}0226\PYZhy{}SM\PYZhy{}5986Z}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11P81\PYZhy{}0126\PYZhy{}SM\PYZhy{}5HL5Y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11P82\PYZhy{}0226\PYZhy{}SM\PYZhy{}5HL4O}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11TT1\PYZhy{}1126\PYZhy{}SM\PYZhy{}5P9GV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11TTK\PYZhy{}0826\PYZhy{}SM\PYZhy{}5N9EG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11TUW\PYZhy{}0226\PYZhy{}SM\PYZhy{}5LU8X}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11UD2\PYZhy{}0626\PYZhy{}SM\PYZhy{}5GU6L}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11VI4\PYZhy{}0226\PYZhy{}SM\PYZhy{}5GU6C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11XUK\PYZhy{}0226\PYZhy{}SM\PYZhy{}5EQLW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11ZTS\PYZhy{}1126\PYZhy{}SM\PYZhy{}5LU9X}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11ZTT\PYZhy{}1026\PYZhy{}SM\PYZhy{}5EQKF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}11ZVC\PYZhy{}0126\PYZhy{}SM\PYZhy{}5986G}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1211K\PYZhy{}0726\PYZhy{}SM\PYZhy{}5FQUW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1212Z\PYZhy{}0426\PYZhy{}SM\PYZhy{}5FQT6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12584\PYZhy{}0826\PYZhy{}SM\PYZhy{}5FQSK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12696\PYZhy{}0326\PYZhy{}SM\PYZhy{}5EGL4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1269C\PYZhy{}0226\PYZhy{}SM\PYZhy{}5EGKS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12BJ1\PYZhy{}0426\PYZhy{}SM\PYZhy{}5FQSO}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12WSC\PYZhy{}0826\PYZhy{}SM\PYZhy{}5EQ5Q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12WSD\PYZhy{}0926\PYZhy{}SM\PYZhy{}5GCNL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12WSE\PYZhy{}1226\PYZhy{}SM\PYZhy{}73KUF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12WSG\PYZhy{}0226\PYZhy{}SM\PYZhy{}5EGIF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12WSH\PYZhy{}0226\PYZhy{}SM\PYZhy{}5GCOG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12WSJ\PYZhy{}0326\PYZhy{}SM\PYZhy{}5GCMT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12WSK\PYZhy{}0926\PYZhy{}SM\PYZhy{}5CVNQ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12WSL\PYZhy{}0626\PYZhy{}SM\PYZhy{}5GCOY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12WSN\PYZhy{}0726\PYZhy{}SM\PYZhy{}5GCMS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12ZZX\PYZhy{}1226\PYZhy{}SM\PYZhy{}5EGHS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12ZZY\PYZhy{}0826\PYZhy{}SM\PYZhy{}5EQMT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}12ZZZ\PYZhy{}1226\PYZhy{}SM\PYZhy{}59HK1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13111\PYZhy{}0226\PYZhy{}SM\PYZhy{}5EQ55}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13112\PYZhy{}0326\PYZhy{}SM\PYZhy{}5P9IW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13113\PYZhy{}0126\PYZhy{}SM\PYZhy{}5LZVX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1313W\PYZhy{}0726\PYZhy{}SM\PYZhy{}5EGK1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}131XE\PYZhy{}0126\PYZhy{}SM\PYZhy{}5LZVC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}131XF\PYZhy{}1826\PYZhy{}SM\PYZhy{}5EGKG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}131XG\PYZhy{}0226\PYZhy{}SM\PYZhy{}5IFG1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}131XH\PYZhy{}0526\PYZhy{}SM\PYZhy{}5DUX7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}131YS\PYZhy{}0726\PYZhy{}SM\PYZhy{}5P9G9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}132AR\PYZhy{}1126\PYZhy{}SM\PYZhy{}5P9GA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}132NY\PYZhy{}1026\PYZhy{}SM\PYZhy{}5P9IY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}132QS\PYZhy{}0326\PYZhy{}SM\PYZhy{}5IJFN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}133LE\PYZhy{}0326\PYZhy{}SM\PYZhy{}5P9G4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1399R\PYZhy{}0126\PYZhy{}SM\PYZhy{}5IFEV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1399T\PYZhy{}0126\PYZhy{}SM\PYZhy{}5KM15}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1399U\PYZhy{}0326\PYZhy{}SM\PYZhy{}5P9G5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}139T6\PYZhy{}0326\PYZhy{}SM\PYZhy{}5J2LY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}139TS\PYZhy{}0126\PYZhy{}SM\PYZhy{}5K7XJ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}139UW\PYZhy{}0126\PYZhy{}SM\PYZhy{}5KM1B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}139YR\PYZhy{}1226\PYZhy{}SM\PYZhy{}5IFEU}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13CF3\PYZhy{}0926\PYZhy{}SM\PYZhy{}5LZZC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13D11\PYZhy{}0226\PYZhy{}SM\PYZhy{}5LZXL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13FH7\PYZhy{}0126\PYZhy{}SM\PYZhy{}5KLZ1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13FHO\PYZhy{}0926\PYZhy{}SM\PYZhy{}5N9EW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13FHP\PYZhy{}0926\PYZhy{}SM\PYZhy{}5L3EC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13FLV\PYZhy{}0226\PYZhy{}SM\PYZhy{}5J2OF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13FLW\PYZhy{}0326\PYZhy{}SM\PYZhy{}5J2M4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13FTW\PYZhy{}0626\PYZhy{}SM\PYZhy{}5IFEX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13FTY\PYZhy{}0726\PYZhy{}SM\PYZhy{}5J2OH}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13FXS\PYZhy{}0726\PYZhy{}SM\PYZhy{}5LZXJ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13G51\PYZhy{}1226\PYZhy{}SM\PYZhy{}5K7Z3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13IVO\PYZhy{}0926\PYZhy{}SM\PYZhy{}5KLZP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13JVG\PYZhy{}0926\PYZhy{}SM\PYZhy{}5IJE1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13N11\PYZhy{}1026\PYZhy{}SM\PYZhy{}5K7XQ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13N1W\PYZhy{}0826\PYZhy{}SM\PYZhy{}5MR5J}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13N2G\PYZhy{}0726\PYZhy{}SM\PYZhy{}5MR38}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13NYB\PYZhy{}0726\PYZhy{}SM\PYZhy{}5MR4J}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13NYC\PYZhy{}2426\PYZhy{}SM\PYZhy{}5MR3K}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13NZ8\PYZhy{}0226\PYZhy{}SM\PYZhy{}5J2OK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13NZ9\PYZhy{}1126\PYZhy{}SM\PYZhy{}5MR37}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13NZA\PYZhy{}1026\PYZhy{}SM\PYZhy{}5MR48}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13O1R\PYZhy{}0826\PYZhy{}SM\PYZhy{}5J2MB}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13O21\PYZhy{}2226\PYZhy{}SM\PYZhy{}5MR3L}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13O3O\PYZhy{}0926\PYZhy{}SM\PYZhy{}5KM1F}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13O3P\PYZhy{}0726\PYZhy{}SM\PYZhy{}5J2OM}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13O3Q\PYZhy{}0626\PYZhy{}SM\PYZhy{}5IJG1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13O61\PYZhy{}0226\PYZhy{}SM\PYZhy{}5KM52}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13OVG\PYZhy{}0226\PYZhy{}SM\PYZhy{}5LU93}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13OVI\PYZhy{}0826\PYZhy{}SM\PYZhy{}5KLZ8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13OVJ\PYZhy{}0626\PYZhy{}SM\PYZhy{}5J2O2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13OVK\PYZhy{}0226\PYZhy{}SM\PYZhy{}6M472}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13OW5\PYZhy{}0626\PYZhy{}SM\PYZhy{}5J2N2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13OW6\PYZhy{}0726\PYZhy{}SM\PYZhy{}5L3FX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13OW7\PYZhy{}0826\PYZhy{}SM\PYZhy{}5L3EL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13OW8\PYZhy{}0126\PYZhy{}SM\PYZhy{}5IJE5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13PDP\PYZhy{}1026\PYZhy{}SM\PYZhy{}5L3FA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13PL6\PYZhy{}1026\PYZhy{}SM\PYZhy{}5L3E5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13PVQ\PYZhy{}0726\PYZhy{}SM\PYZhy{}5L3GI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13PVR\PYZhy{}0626\PYZhy{}SM\PYZhy{}5S2RC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13QBU\PYZhy{}0626\PYZhy{}SM\PYZhy{}5J2OG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13QJ3\PYZhy{}0926\PYZhy{}SM\PYZhy{}73KX5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13QJC\PYZhy{}0826\PYZhy{}SM\PYZhy{}5RQKC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13RTJ\PYZhy{}0326\PYZhy{}SM\PYZhy{}5YYAE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13RTK\PYZhy{}0326\PYZhy{}SM\PYZhy{}5RQHS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13S86\PYZhy{}1126\PYZhy{}SM\PYZhy{}5RQJX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13U4I\PYZhy{}0526\PYZhy{}SM\PYZhy{}5LU59}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13VXT\PYZhy{}0626\PYZhy{}SM\PYZhy{}5SIA1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13VXU\PYZhy{}0826\PYZhy{}SM\PYZhy{}5KLZ2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13W46\PYZhy{}0926\PYZhy{}SM\PYZhy{}5LU3T}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13X6H\PYZhy{}0526\PYZhy{}SM\PYZhy{}5LU4Q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13X6J\PYZhy{}0826\PYZhy{}SM\PYZhy{}5LU32}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}13YAN\PYZhy{}0926\PYZhy{}SM\PYZhy{}5O9C3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}144GL\PYZhy{}1226\PYZhy{}SM\PYZhy{}5O9A4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}144GM\PYZhy{}0226\PYZhy{}SM\PYZhy{}5Q5CB}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}144GO\PYZhy{}0126\PYZhy{}SM\PYZhy{}5LUAO}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}145LT\PYZhy{}0226\PYZhy{}SM\PYZhy{}5S2QK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}145LU\PYZhy{}0426\PYZhy{}SM\PYZhy{}5O9AH}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}145ME\PYZhy{}0126\PYZhy{}SM\PYZhy{}5S2QM}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}145MG\PYZhy{}0826\PYZhy{}SM\PYZhy{}5Q5C2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}145MH\PYZhy{}0426\PYZhy{}SM\PYZhy{}5LU8T}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}145MI\PYZhy{}1126\PYZhy{}SM\PYZhy{}5O9AK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}146FQ\PYZhy{}0726\PYZhy{}SM\PYZhy{}5LUA7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}146FR\PYZhy{}0326\PYZhy{}SM\PYZhy{}5SI8U}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14753\PYZhy{}0926\PYZhy{}SM\PYZhy{}5Q5BI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1477Z\PYZhy{}0226\PYZhy{}SM\PYZhy{}5TDCI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}147F4\PYZhy{}0826\PYZhy{}SM\PYZhy{}5QGRB}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}147GR\PYZhy{}0726\PYZhy{}SM\PYZhy{}5S2PL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}148VI\PYZhy{}0526\PYZhy{}SM\PYZhy{}5TDDG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}148VJ\PYZhy{}0726\PYZhy{}SM\PYZhy{}5LU8J}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1497J\PYZhy{}0126\PYZhy{}SM\PYZhy{}5Q5BK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14A5H\PYZhy{}0726\PYZhy{}SM\PYZhy{}5Q5DW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14A6H\PYZhy{}2426\PYZhy{}SM\PYZhy{}5Q5BO}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14ABY\PYZhy{}0926\PYZhy{}SM\PYZhy{}5Q5DY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14AS3\PYZhy{}0226\PYZhy{}SM\PYZhy{}5Q5B6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14ASI\PYZhy{}0726\PYZhy{}SM\PYZhy{}5Q5DC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14B4R\PYZhy{}0126\PYZhy{}SM\PYZhy{}5TDE4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14BIN\PYZhy{}0126\PYZhy{}SM\PYZhy{}5TDCG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14BMU\PYZhy{}0226\PYZhy{}SM\PYZhy{}5S2QA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14BMV\PYZhy{}0726\PYZhy{}SM\PYZhy{}73KVE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14C38\PYZhy{}0826\PYZhy{}SM\PYZhy{}5S2U8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14C39\PYZhy{}0226\PYZhy{}SM\PYZhy{}5TDDW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14C5O\PYZhy{}0826\PYZhy{}SM\PYZhy{}5TDEG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14DAQ\PYZhy{}0826\PYZhy{}SM\PYZhy{}73KWT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14E6C\PYZhy{}2626\PYZhy{}SM\PYZhy{}5RQJP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14E6E\PYZhy{}0326\PYZhy{}SM\PYZhy{}73KY6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14E7W\PYZhy{}0926\PYZhy{}SM\PYZhy{}5YYA4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14ICK\PYZhy{}1626\PYZhy{}SM\PYZhy{}6ETZX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14ICL\PYZhy{}0426\PYZhy{}SM\PYZhy{}5RQJ3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14JIY\PYZhy{}1226\PYZhy{}SM\PYZhy{}6871R}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PHW\PYZhy{}2926\PYZhy{}SM\PYZhy{}6AJBA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PII\PYZhy{}0826\PYZhy{}SM\PYZhy{}6871S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PJ3\PYZhy{}0126\PYZhy{}SM\PYZhy{}69LQP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PJ4\PYZhy{}0326\PYZhy{}SM\PYZhy{}664OT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PJ6\PYZhy{}0326\PYZhy{}SM\PYZhy{}6871H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PJM\PYZhy{}1326\PYZhy{}SM\PYZhy{}664NX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PJO\PYZhy{}0626\PYZhy{}SM\PYZhy{}6LLHH}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PK6\PYZhy{}0426\PYZhy{}SM\PYZhy{}6EU1J}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PKU\PYZhy{}0326\PYZhy{}SM\PYZhy{}6AJA7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PKV\PYZhy{}0626\PYZhy{}SM\PYZhy{}6AJA2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PN3\PYZhy{}0826\PYZhy{}SM\PYZhy{}69LOS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PN4\PYZhy{}1526\PYZhy{}SM\PYZhy{}6871V}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14PQA\PYZhy{}1226\PYZhy{}SM\PYZhy{}6M47A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}14XAO\PYZhy{}0426\PYZhy{}SM\PYZhy{}6AJB6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15CHC\PYZhy{}0126\PYZhy{}SM\PYZhy{}5YYBA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15CHQ\PYZhy{}0826\PYZhy{}SM\PYZhy{}69LOT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15CHR\PYZhy{}1726\PYZhy{}SM\PYZhy{}7DUGW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15D1Q\PYZhy{}0626\PYZhy{}SM\PYZhy{}6AJAZ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15DCZ\PYZhy{}1226\PYZhy{}SM\PYZhy{}6871P}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15DDE\PYZhy{}0626\PYZhy{}SM\PYZhy{}69LOK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15DZA\PYZhy{}0226\PYZhy{}SM\PYZhy{}7KFS6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15EO6\PYZhy{}0126\PYZhy{}SM\PYZhy{}6LPKJ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15ER7\PYZhy{}0726\PYZhy{}SM\PYZhy{}7KUMF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15ETS\PYZhy{}0526\PYZhy{}SM\PYZhy{}6PAN3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15EU6\PYZhy{}1426\PYZhy{}SM\PYZhy{}6M48E}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15FZZ\PYZhy{}0226\PYZhy{}SM\PYZhy{}6LLI4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15G19\PYZhy{}0626\PYZhy{}SM\PYZhy{}6M474}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15G1A\PYZhy{}0326\PYZhy{}SM\PYZhy{}6M467}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15RIE\PYZhy{}0426\PYZhy{}SM\PYZhy{}7KUMH}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15RJ7\PYZhy{}0326\PYZhy{}SM\PYZhy{}6M47H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15RJE\PYZhy{}1326\PYZhy{}SM\PYZhy{}6LPI6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15SB6\PYZhy{}1526\PYZhy{}SM\PYZhy{}7KUMQ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15SHU\PYZhy{}0726\PYZhy{}SM\PYZhy{}7KUFI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15SHV\PYZhy{}0426\PYZhy{}SM\PYZhy{}6M476}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}15UF6\PYZhy{}1126\PYZhy{}SM\PYZhy{}6LPJ3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}169BO\PYZhy{}0326\PYZhy{}SM\PYZhy{}7EPIM}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}16AAH\PYZhy{}0326\PYZhy{}SM\PYZhy{}7DHML}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}16BQI\PYZhy{}0726\PYZhy{}SM\PYZhy{}6LPJZ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}16GPK\PYZhy{}0926\PYZhy{}SM\PYZhy{}6LPJ9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}16MT8\PYZhy{}0626\PYZhy{}SM\PYZhy{}6M47Q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}16MTA\PYZhy{}0726\PYZhy{}SM\PYZhy{}7KUL4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}16NGA\PYZhy{}0326\PYZhy{}SM\PYZhy{}718AJ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}16NPX\PYZhy{}1426\PYZhy{}SM\PYZhy{}6LPK3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}16XZY\PYZhy{}0726\PYZhy{}SM\PYZhy{}79OMU}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}16XZZ\PYZhy{}0826\PYZhy{}SM\PYZhy{}7IGM3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}16YQH\PYZhy{}0326\PYZhy{}SM\PYZhy{}6LPJV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}16Z82\PYZhy{}0426\PYZhy{}SM\PYZhy{}7EPGX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}178AV\PYZhy{}0726\PYZhy{}SM\PYZhy{}6LPJI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17EVP\PYZhy{}0126\PYZhy{}SM\PYZhy{}7EPHW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17EVQ\PYZhy{}0526\PYZhy{}SM\PYZhy{}7KFSK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17F96\PYZhy{}0526\PYZhy{}SM\PYZhy{}79OLE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17F97\PYZhy{}0626\PYZhy{}SM\PYZhy{}7IGOH}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17F9E\PYZhy{}0626\PYZhy{}SM\PYZhy{}79ON5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17F9Y\PYZhy{}0526\PYZhy{}SM\PYZhy{}7EWDC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17HG3\PYZhy{}0226\PYZhy{}SM\PYZhy{}7EWEA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17HGU\PYZhy{}0826\PYZhy{}SM\PYZhy{}7EWE5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17HHE\PYZhy{}0426\PYZhy{}SM\PYZhy{}79OK3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17HHY\PYZhy{}0826\PYZhy{}SM\PYZhy{}7EPID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17HII\PYZhy{}1926\PYZhy{}SM\PYZhy{}79OLB}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17JCI\PYZhy{}0626\PYZhy{}SM\PYZhy{}7IGM7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17KNJ\PYZhy{}1026\PYZhy{}SM\PYZhy{}79ONK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}17MF6\PYZhy{}0626\PYZhy{}SM\PYZhy{}7LT8D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}183FY\PYZhy{}0626\PYZhy{}SM\PYZhy{}79OKR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}183WM\PYZhy{}2626\PYZhy{}SM\PYZhy{}7KFRY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}18465\PYZhy{}1426\PYZhy{}SM\PYZhy{}7KFTF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}18A66\PYZhy{}0826\PYZhy{}SM\PYZhy{}72D5Z}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}18A67\PYZhy{}0826\PYZhy{}SM\PYZhy{}7KFTI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}18A6Q\PYZhy{}0726\PYZhy{}SM\PYZhy{}7LT8Y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}18A7A\PYZhy{}0826\PYZhy{}SM\PYZhy{}7KFTJ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}18D9A\PYZhy{}0126\PYZhy{}SM\PYZhy{}7KFSI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}18D9B\PYZhy{}0726\PYZhy{}SM\PYZhy{}72D6K}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}18D9U\PYZhy{}1026\PYZhy{}SM\PYZhy{}72D5R}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}18QFQ\PYZhy{}0726\PYZhy{}SM\PYZhy{}7LG6D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1A3MV\PYZhy{}0326\PYZhy{}SM\PYZhy{}73KW7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1A8FM\PYZhy{}0726\PYZhy{}SM\PYZhy{}7DUGK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1A8G6\PYZhy{}0626\PYZhy{}SM\PYZhy{}7IGNB}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1A8G7\PYZhy{}1026\PYZhy{}SM\PYZhy{}73KVA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1AMEY\PYZhy{}0126\PYZhy{}SM\PYZhy{}73KTX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1AMFI\PYZhy{}0526\PYZhy{}SM\PYZhy{}7189M}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1AX8Z\PYZhy{}0826\PYZhy{}SM\PYZhy{}7DUFZ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1AX9I\PYZhy{}0626\PYZhy{}SM\PYZhy{}72D54}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1AX9J\PYZhy{}2126\PYZhy{}SM\PYZhy{}731DD}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1AX9K\PYZhy{}0626\PYZhy{}SM\PYZhy{}73KVD}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1AYCT\PYZhy{}0226\PYZhy{}SM\PYZhy{}73KVB}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1B8KE\PYZhy{}0626\PYZhy{}SM\PYZhy{}7189H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1B8KZ\PYZhy{}0426\PYZhy{}SM\PYZhy{}731DP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1B8L1\PYZhy{}1626\PYZhy{}SM\PYZhy{}7IGMH}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1B8SF\PYZhy{}0626\PYZhy{}SM\PYZhy{}73KVV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1B8SG\PYZhy{}1126\PYZhy{}SM\PYZhy{}7IGMT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1B932\PYZhy{}0926\PYZhy{}SM\PYZhy{}73KUP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1B97I\PYZhy{}0326\PYZhy{}SM\PYZhy{}7DUGB}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1BAJH\PYZhy{}0926\PYZhy{}SM\PYZhy{}79OO6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1C2JI\PYZhy{}0326\PYZhy{}SM\PYZhy{}7EWFD}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1C4CL\PYZhy{}0726\PYZhy{}SM\PYZhy{}7IGP9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1C64N\PYZhy{}1026\PYZhy{}SM\PYZhy{}79ONM}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1C6VR\PYZhy{}0426\PYZhy{}SM\PYZhy{}7IGN6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1C6VS\PYZhy{}0826\PYZhy{}SM\PYZhy{}7EWEI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1CAMQ\PYZhy{}1126\PYZhy{}SM\PYZhy{}7EWFE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1CAMR\PYZhy{}0226\PYZhy{}SM\PYZhy{}7DUGO}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1CB4F\PYZhy{}0826\PYZhy{}SM\PYZhy{}793CV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1CB4H\PYZhy{}0126\PYZhy{}SM\PYZhy{}7IGN2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1CB4I\PYZhy{}0726\PYZhy{}SM\PYZhy{}7DUGS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1CB4J\PYZhy{}1426\PYZhy{}SM\PYZhy{}7MKFR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1EH9U\PYZhy{}0926\PYZhy{}SM\PYZhy{}7EWF1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1EKGG\PYZhy{}0726\PYZhy{}SM\PYZhy{}7IGPX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1EMGI\PYZhy{}0826\PYZhy{}SM\PYZhy{}7EPHY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}1EN7A\PYZhy{}1026\PYZhy{}SM\PYZhy{}7IGPZ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}N7MS\PYZhy{}2326\PYZhy{}SM\PYZhy{}2HMLD}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}NFK9\PYZhy{}0726\PYZhy{}SM\PYZhy{}2HMJW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}OHPK\PYZhy{}2626\PYZhy{}SM\PYZhy{}2HMK9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}OHPM\PYZhy{}2626\PYZhy{}SM\PYZhy{}33HC5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}OIZG\PYZhy{}0226\PYZhy{}SM\PYZhy{}2TC5L}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}OIZI\PYZhy{}0726\PYZhy{}SM\PYZhy{}2XCEI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}OOBJ\PYZhy{}2626\PYZhy{}SM\PYZhy{}2I3F6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}OXRK\PYZhy{}0626\PYZhy{}SM\PYZhy{}2HMJ5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}OXRL\PYZhy{}2626\PYZhy{}SM\PYZhy{}2I3F1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}OXRO\PYZhy{}1226\PYZhy{}SM\PYZhy{}48TDL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}OXRP\PYZhy{}0326\PYZhy{}SM\PYZhy{}33HBJ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}P4PQ\PYZhy{}2626\PYZhy{}SM\PYZhy{}33HC9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}P4QS\PYZhy{}2626\PYZhy{}SM\PYZhy{}2I3EV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}P4QT\PYZhy{}2626\PYZhy{}SM\PYZhy{}2I3FM}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}P78B\PYZhy{}0526\PYZhy{}SM\PYZhy{}2I5F7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}PLZ4\PYZhy{}1226\PYZhy{}SM\PYZhy{}2I5FE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}POYW\PYZhy{}0826\PYZhy{}SM\PYZhy{}2XCEM}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}PWCY\PYZhy{}2326\PYZhy{}SM\PYZhy{}2I3EQ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}PWN1\PYZhy{}2626\PYZhy{}SM\PYZhy{}2I3FH}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}PX3G\PYZhy{}2626\PYZhy{}SM\PYZhy{}2I3EG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Q2AG\PYZhy{}0826\PYZhy{}SM\PYZhy{}2HMKF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Q2AH\PYZhy{}0726\PYZhy{}SM\PYZhy{}2I3EA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Q2AI\PYZhy{}0326\PYZhy{}SM\PYZhy{}2I3EK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Q734\PYZhy{}0526\PYZhy{}SM\PYZhy{}2I3EH}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}QDVJ\PYZhy{}0226\PYZhy{}SM\PYZhy{}2I5FV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}QDVN\PYZhy{}0626\PYZhy{}SM\PYZhy{}2I3FP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}QEG5\PYZhy{}0826\PYZhy{}SM\PYZhy{}2I5GF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}QEL4\PYZhy{}0726\PYZhy{}SM\PYZhy{}3GIJ5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}QLQ7\PYZhy{}0726\PYZhy{}SM\PYZhy{}2I5G2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}QV31\PYZhy{}0726\PYZhy{}SM\PYZhy{}3GAEG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}QV44\PYZhy{}0826\PYZhy{}SM\PYZhy{}2S1RG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}QXCU\PYZhy{}0326\PYZhy{}SM\PYZhy{}2TC63}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}R3RS\PYZhy{}0726\PYZhy{}SM\PYZhy{}3GIJR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}R53T\PYZhy{}0526\PYZhy{}SM\PYZhy{}3GADL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}R55C\PYZhy{}0626\PYZhy{}SM\PYZhy{}2TF4Q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}R55E\PYZhy{}0826\PYZhy{}SM\PYZhy{}2TC5M}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}R55G\PYZhy{}0726\PYZhy{}SM\PYZhy{}2TC6J}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}REY6\PYZhy{}0526\PYZhy{}SM\PYZhy{}2TF5M}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}RM2N\PYZhy{}0526\PYZhy{}SM\PYZhy{}2TF4N}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}RN64\PYZhy{}0626\PYZhy{}SM\PYZhy{}2TC5V}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}RNOR\PYZhy{}0926\PYZhy{}SM\PYZhy{}2TF56}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}RTLS\PYZhy{}0626\PYZhy{}SM\PYZhy{}5SI7Z}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}RU1J\PYZhy{}0226\PYZhy{}SM\PYZhy{}2TF5Y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}RU72\PYZhy{}0126\PYZhy{}SM\PYZhy{}2TF6Z}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}RUSQ\PYZhy{}1026\PYZhy{}SM\PYZhy{}2TF6V}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}RVPV\PYZhy{}1226\PYZhy{}SM\PYZhy{}2TF73}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}RWS6\PYZhy{}0626\PYZhy{}SM\PYZhy{}2XCAS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}RWSA\PYZhy{}0826\PYZhy{}SM\PYZhy{}2XCBF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}S32W\PYZhy{}0726\PYZhy{}SM\PYZhy{}2XCBL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}S341\PYZhy{}0226\PYZhy{}SM\PYZhy{}5S2VG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}S7SE\PYZhy{}0726\PYZhy{}SM\PYZhy{}2XCD7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}S7SF\PYZhy{}0226\PYZhy{}SM\PYZhy{}5SI7H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}SE5C\PYZhy{}0726\PYZhy{}SM\PYZhy{}4BRWY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}SIU8\PYZhy{}0626\PYZhy{}SM\PYZhy{}2XCDN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}SJXC\PYZhy{}0726\PYZhy{}SM\PYZhy{}2XCFJ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}SN8G\PYZhy{}1526\PYZhy{}SM\PYZhy{}4DM79}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}SNOS\PYZhy{}0226\PYZhy{}SM\PYZhy{}32PLR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}T2IS\PYZhy{}0626\PYZhy{}SM\PYZhy{}32QP6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}T5JW\PYZhy{}1226\PYZhy{}SM\PYZhy{}3GACY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}T6MN\PYZhy{}0626\PYZhy{}SM\PYZhy{}32PM9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}T6MO\PYZhy{}0226\PYZhy{}SM\PYZhy{}32QOL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}T8EM\PYZhy{}0226\PYZhy{}SM\PYZhy{}3DB7C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}TKQ1\PYZhy{}0126\PYZhy{}SM\PYZhy{}33HB3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}TMMY\PYZhy{}0826\PYZhy{}SM\PYZhy{}33HB9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}TSE9\PYZhy{}0626\PYZhy{}SM\PYZhy{}3DB8B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}U3ZM\PYZhy{}0126\PYZhy{}SM\PYZhy{}3DB8M}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}U3ZN\PYZhy{}0326\PYZhy{}SM\PYZhy{}3DB86}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}U4B1\PYZhy{}0626\PYZhy{}SM\PYZhy{}3DB8L}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}U8T8\PYZhy{}2326\PYZhy{}SM\PYZhy{}3DB96}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}UJMC\PYZhy{}0326\PYZhy{}SM\PYZhy{}3GAE2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}V1D1\PYZhy{}0926\PYZhy{}SM\PYZhy{}4JBHQ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}V955\PYZhy{}0426\PYZhy{}SM\PYZhy{}3GAEL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}VJYA\PYZhy{}0426\PYZhy{}SM\PYZhy{}3GIJK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}VUSG\PYZhy{}0426\PYZhy{}SM\PYZhy{}3GIKD}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}W5WG\PYZhy{}1426\PYZhy{}SM\PYZhy{}4KKZP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}W5X1\PYZhy{}0426\PYZhy{}SM\PYZhy{}3GILB}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WEY5\PYZhy{}0526\PYZhy{}SM\PYZhy{}3GIKZ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WFG7\PYZhy{}0326\PYZhy{}SM\PYZhy{}5SI7L}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WFG8\PYZhy{}0426\PYZhy{}SM\PYZhy{}3GILD}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WFJO\PYZhy{}0226\PYZhy{}SM\PYZhy{}3GIKW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WH7G\PYZhy{}0526\PYZhy{}SM\PYZhy{}3NMBI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WHPG\PYZhy{}0226\PYZhy{}SM\PYZhy{}3NMB9}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WHSB\PYZhy{}1626\PYZhy{}SM\PYZhy{}3LK6J}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WHSE\PYZhy{}0626\PYZhy{}SM\PYZhy{}4RGNF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WK11\PYZhy{}0926\PYZhy{}SM\PYZhy{}3NMAU}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WL46\PYZhy{}0126\PYZhy{}SM\PYZhy{}3TW8I}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WOFL\PYZhy{}0726\PYZhy{}SM\PYZhy{}3MJG4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WRHU\PYZhy{}0926\PYZhy{}SM\PYZhy{}4E3IG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WVLH\PYZhy{}0626\PYZhy{}SM\PYZhy{}3MJG7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WWYW\PYZhy{}0826\PYZhy{}SM\PYZhy{}3NB2X}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WXYG\PYZhy{}0226\PYZhy{}SM\PYZhy{}3NB2Y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WY7C\PYZhy{}0226\PYZhy{}SM\PYZhy{}3NB37}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WYBS\PYZhy{}1926\PYZhy{}SM\PYZhy{}3NM8N}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WYJK\PYZhy{}1626\PYZhy{}SM\PYZhy{}3NM9J}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}WYVS\PYZhy{}0326\PYZhy{}SM\PYZhy{}3NM9V}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}X15G\PYZhy{}0526\PYZhy{}SM\PYZhy{}3NMB7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}X4LF\PYZhy{}0426\PYZhy{}SM\PYZhy{}3NMB5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}X4XX\PYZhy{}0926\PYZhy{}SM\PYZhy{}46MV7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}X4XY\PYZhy{}0826\PYZhy{}SM\PYZhy{}4E3JM}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}X5EB\PYZhy{}0726\PYZhy{}SM\PYZhy{}46MVR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}X8HC\PYZhy{}0726\PYZhy{}SM\PYZhy{}46MWG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}XBED\PYZhy{}0126\PYZhy{}SM\PYZhy{}47JY7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}XBEW\PYZhy{}0126\PYZhy{}SM\PYZhy{}4AT66}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}XGQ4\PYZhy{}0426\PYZhy{}SM\PYZhy{}4AT4I}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}XLM4\PYZhy{}0726\PYZhy{}SM\PYZhy{}4AT64}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}XMK1\PYZhy{}0626\PYZhy{}SM\PYZhy{}4B65A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}XUW1\PYZhy{}1026\PYZhy{}SM\PYZhy{}4BONY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}XUZC\PYZhy{}0126\PYZhy{}SM\PYZhy{}4BOO6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}XV7Q\PYZhy{}0326\PYZhy{}SM\PYZhy{}4BRVM}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}XXEK\PYZhy{}1326\PYZhy{}SM\PYZhy{}4BRV1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}XYKS\PYZhy{}0826\PYZhy{}SM\PYZhy{}4BRVF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Y111\PYZhy{}1926\PYZhy{}SM\PYZhy{}4SOIS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Y114\PYZhy{}0626\PYZhy{}SM\PYZhy{}4TT98}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Y3I4\PYZhy{}0226\PYZhy{}SM\PYZhy{}4TT27}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Y3IK\PYZhy{}0526\PYZhy{}SM\PYZhy{}4WWE3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Y5LM\PYZhy{}0626\PYZhy{}SM\PYZhy{}4V6G4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Y5V5\PYZhy{}0326\PYZhy{}SM\PYZhy{}5RQJG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Y5V6\PYZhy{}0526\PYZhy{}SM\PYZhy{}4VBRV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Y8E4\PYZhy{}0126\PYZhy{}SM\PYZhy{}4VBQ2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Y9LG\PYZhy{}0426\PYZhy{}SM\PYZhy{}4VBRT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}YB5E\PYZhy{}0626\PYZhy{}SM\PYZhy{}4VDSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}YB5K\PYZhy{}0526\PYZhy{}SM\PYZhy{}5LUAS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}YEC3\PYZhy{}0826\PYZhy{}SM\PYZhy{}4WWFP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}YEC4\PYZhy{}0626\PYZhy{}SM\PYZhy{}5CVLU}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}YF7O\PYZhy{}0726\PYZhy{}SM\PYZhy{}4W213}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}YFC4\PYZhy{}2626\PYZhy{}SM\PYZhy{}5P9FQ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}YFCO\PYZhy{}0326\PYZhy{}SM\PYZhy{}4W1ZP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}YJ89\PYZhy{}0726\PYZhy{}SM\PYZhy{}5P9F7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}Z9EW\PYZhy{}0226\PYZhy{}SM\PYZhy{}5CVM7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZA64\PYZhy{}0426\PYZhy{}SM\PYZhy{}5HL96}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZAB5\PYZhy{}0726\PYZhy{}SM\PYZhy{}5P9JG}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZAJG\PYZhy{}0726\PYZhy{}SM\PYZhy{}5HL9A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZAK1\PYZhy{}0726\PYZhy{}SM\PYZhy{}5HL8Q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZC5H\PYZhy{}0626\PYZhy{}SM\PYZhy{}5LU9K}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZDTS\PYZhy{}0926\PYZhy{}SM\PYZhy{}5YY9D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZDYS\PYZhy{}0626\PYZhy{}SM\PYZhy{}5J2N5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZE7O\PYZhy{}1126\PYZhy{}SM\PYZhy{}57WC8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZF28\PYZhy{}0826\PYZhy{}SM\PYZhy{}4WKGJ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZGAY\PYZhy{}1026\PYZhy{}SM\PYZhy{}4WWBR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZLFU\PYZhy{}0626\PYZhy{}SM\PYZhy{}4WWBO}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZLV1\PYZhy{}0126\PYZhy{}SM\PYZhy{}4WWBZ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZLWG\PYZhy{}0526\PYZhy{}SM\PYZhy{}4WWFB}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZPCL\PYZhy{}0126\PYZhy{}SM\PYZhy{}4WWC8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZPU1\PYZhy{}0426\PYZhy{}SM\PYZhy{}4WWCA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZQG8\PYZhy{}0926\PYZhy{}SM\PYZhy{}57WFF}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZQUD\PYZhy{}0126\PYZhy{}SM\PYZhy{}7EPIS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZT9W\PYZhy{}0226\PYZhy{}SM\PYZhy{}4YCCZ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZT9X\PYZhy{}0226\PYZhy{}SM\PYZhy{}51MT2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZTPG\PYZhy{}0826\PYZhy{}SM\PYZhy{}5DUVC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZTSS\PYZhy{}0226\PYZhy{}SM\PYZhy{}59877}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZTX8\PYZhy{}0626\PYZhy{}SM\PYZhy{}59HKC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZUA1\PYZhy{}0926\PYZhy{}SM\PYZhy{}4YCDX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZV6S\PYZhy{}0226\PYZhy{}SM\PYZhy{}59HJT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZV7C\PYZhy{}0126\PYZhy{}SM\PYZhy{}57WDE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZVP2\PYZhy{}0426\PYZhy{}SM\PYZhy{}57WC2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZVT3\PYZhy{}0726\PYZhy{}SM\PYZhy{}5GICN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZVZP\PYZhy{}1026\PYZhy{}SM\PYZhy{}5GICI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZVZQ\PYZhy{}0626\PYZhy{}SM\PYZhy{}59HJU}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZXG5\PYZhy{}0926\PYZhy{}SM\PYZhy{}5NQ8H}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZY6K\PYZhy{}0226\PYZhy{}SM\PYZhy{}5SIAY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZYFC\PYZhy{}0926\PYZhy{}SM\PYZhy{}5GZWW}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZYFD\PYZhy{}0826\PYZhy{}SM\PYZhy{}5NQ9A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZYFG\PYZhy{}0626\PYZhy{}SM\PYZhy{}5GZYA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZYT6\PYZhy{}0426\PYZhy{}SM\PYZhy{}5GID3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZYVF\PYZhy{}1126\PYZhy{}SM\PYZhy{}5E458}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZYW4\PYZhy{}1126\PYZhy{}SM\PYZhy{}5SI99}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZYY3\PYZhy{}1926\PYZhy{}SM\PYZhy{}5GZXS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZZ64\PYZhy{}0126\PYZhy{}SM\PYZhy{}5GZXA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GTEX\PYZhy{}ZZPU\PYZhy{}1326\PYZhy{}SM\PYZhy{}5GZWS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{p}{]}
+        \PY{c+c1}{\PYZsh{} set batch to all \PYZlt{}data\PYZgt{} including [fields] =\PYZgt{} creates dataframe of excl. thyroid data}
+        \PY{n}{batch} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{fields}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} Preview the first 5 lines of the loaded data }
+        \PY{n}{batch}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{preview-data}{%
+\section{3 Preview data}\label{preview-data}}
+
+    \hypertarget{plot-data}{%
+\subsection{3.1 plot data}\label{plot-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} transpose dataframes such that features are rows not columns}
+        \PY{n}{batch} \PY{o}{=} \PY{n}{batch}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Preview the first 5 lines of the loaded data}
+        \PY{n}{batch}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{batch}\PY{p}{[}\PY{n}{batch}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{batch}\PY{p}{[}\PY{n}{batch}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{Y} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{fir\PYZus{}transform}\PY{p}{(}\PY{n}{std\PYZus{}batch}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
